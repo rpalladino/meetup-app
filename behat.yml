@@ -1,0 +1,5 @@
+default:
+  suites:
+    meetup_attendee:
+      contexts: [ AttendeeContext ]
+      filters: { role: meetup attendee }
