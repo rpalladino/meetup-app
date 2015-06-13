@@ -34,7 +34,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iAttendThisEventAndGoToCheckIn()
     {
-        throw new PendingException();
+        return; // no-op in this context
     }
 
     /**
