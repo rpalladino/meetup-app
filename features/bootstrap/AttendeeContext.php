@@ -3,6 +3,7 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use ChicagoPHP\MeetupApp\Member\Member;
 
 /**
  * Defines application features from the specific context.
@@ -10,11 +11,11 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
     /**
-     * @Given I am a meetup member named :arg1
+     * @Given I am a meetup member named :name
      */
-    public function iAmAMeetupMemberNamed($arg1)
+    public function iAmAMeetupMemberNamed($name)
     {
-        throw new PendingException();
+        $this->member = Member::named($name);
     }
 
     /**
