@@ -4,6 +4,8 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use ChicagoPHP\MeetupApp\Member\Member;
+use ChicagoPHP\MeetupApp\Event\Event;
+use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
 
 /**
  * Defines application features from the specific context.
@@ -19,11 +21,12 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given I have RSVP'd :arg1 for the event named :arg2
+     * @Given I have RSVP'd :response for the event named :name
      */
-    public function iHaveRsvpDForTheEventNamed($arg1, $arg2)
+    public function iHaveRsvpDForTheEventNamed($response, $name)
     {
-        throw new PendingException();
+        $rsvp = new Rsvp($this->member, $response);
+        $this->event = Event::namedWithRSVPs($name, [$rsvp]);
     }
 
     /**
