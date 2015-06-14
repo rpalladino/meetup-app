@@ -4,6 +4,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use ChicagoPHP\MeetupApp\CheckIn\CheckInList;
+use ChicagoPHP\MeetupApp\CheckIn\CheckedIn;
 use ChicagoPHP\MeetupApp\Event\Event;
 use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
@@ -81,7 +82,8 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeAMessageThatIHaveSuccessfulyCheckedIn()
     {
-        throw new PendingException();
+        $checkIn = $this->checkInList->findFor($this->member);
+        expect($checkIn->getStatus())->toBeAnInstanceOf(CheckedIn::class);
     }
 
     /**
