@@ -2,7 +2,6 @@
 
 namespace ChicagoPHP\MeetupApp\CheckIn;
 
-use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use SplObjectStorage;
