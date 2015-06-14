@@ -42,7 +42,13 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iSelectMyselfFromTheCheckInListForThisEvent()
     {
-        throw new PendingException();
+        $checkInList = CheckInList::forEvent($this->event);
+        foreach ($checkInList as $checkIn) {
+            if ($checkIn->getMember() == $this->member) {
+                $selectedForCheckIn = $checkIn->getMember();
+            }
+        }
+        eval(\Psy\sh());
     }
 
     /**
