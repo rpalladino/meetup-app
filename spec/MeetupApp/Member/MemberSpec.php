@@ -16,4 +16,9 @@ class MemberSpec extends ObjectBehavior
     {
         $this->shouldHaveType('ChicagoPHP\MeetupApp\Member\Member');
     }
+
+    function it_can_be_cast_to_string()
+    {
+        $this->__toString()->shouldReturn("John Smith");
+    }
 }

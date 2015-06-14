@@ -22,4 +22,9 @@ class EventSpec extends ObjectBehavior
     {
         $this->shouldHaveType('ChicagoPHP\MeetupApp\Event\Event');
     }
+
+    function it_retrieves_RSVPs()
+    {
+        $this->getRSVPs()->shouldBeArray();
+    }
 }

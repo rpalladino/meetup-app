@@ -3,15 +3,28 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use ChicagoPHP\MeetupApp\Member\Member;
+use ChicagoPHP\MeetupApp\CheckIn\CheckInList;
 use ChicagoPHP\MeetupApp\Event\Event;
+use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
+use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
+
 
 /**
  * Defines application features from the specific context.
  */
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
+    /**
+     * @Transform :response
+     */
+    public function transformStringToResponse($string)
+    {
+        if ("Yes" === $string) {
+            return new YesResponse;
+        }
+    }
+    
     /**
      * @Given I am a meetup member named :name
      */
@@ -48,7 +61,6 @@ class AttendeeContext implements Context, SnippetAcceptingContext
                 $selectedForCheckIn = $checkIn->getMember();
             }
         }
-        eval(\Psy\sh());
     }
 
     /**
