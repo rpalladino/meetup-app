@@ -9,7 +9,7 @@ use ChicagoPHP\MeetupApp\CheckIn\CheckedIn;
 use ChicagoPHP\MeetupApp\Event\Event;
 use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
-use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
+use ChicagoPHP\MeetupApp\Rsvp\Yes;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -18,7 +18,7 @@ class CheckInListSpec extends ObjectBehavior
     function let()
     {
         $name = "Open Source Workshop";
-        $rsvp = new Rsvp(Member::named("John Smith"), new YesResponse());
+        $rsvp = new Rsvp(Member::named("John Smith"), new Yes());
         $event = Event::namedWithRSVPs($name, [$rsvp]);
 
         $this->beConstructedThrough("forEvent", [$event]);

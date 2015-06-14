@@ -8,7 +8,7 @@ use ChicagoPHP\MeetupApp\CheckIn\CheckedIn;
 use ChicagoPHP\MeetupApp\Event\Event;
 use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
-use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
+use ChicagoPHP\MeetupApp\Rsvp\Yes;
 
 
 /**
@@ -27,7 +27,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     public function transformStringToResponse($string)
     {
         if ("Yes" === $string) {
-            return new YesResponse;
+            return new Yes;
         }
     }
     

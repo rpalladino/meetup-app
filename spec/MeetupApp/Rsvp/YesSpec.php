@@ -6,7 +6,7 @@ use ChicagoPHP\MeetupApp\Rsvp\Response;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class YesResponseSpec extends ObjectBehavior
+class YesSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

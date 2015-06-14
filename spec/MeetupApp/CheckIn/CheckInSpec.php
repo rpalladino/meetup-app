@@ -8,7 +8,7 @@ use ChicagoPHP\MeetupApp\CheckIn\NotCheckedIn;
 use ChicagoPHP\MeetupApp\CheckIn\Status;
 use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
-use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
+use ChicagoPHP\MeetupApp\Rsvp\Yes;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -16,7 +16,7 @@ class CheckInSpec extends ObjectBehavior
 {
     function let()
     {
-        $rsvp = new Rsvp(Member::named("John Smith"), new YesResponse());
+        $rsvp = new Rsvp(Member::named("John Smith"), new Yes());
         $this->beConstructedThrough("fromRSVP", [$rsvp]);
     }
 

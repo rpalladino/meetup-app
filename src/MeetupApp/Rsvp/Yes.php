@@ -2,6 +2,6 @@
 
 namespace ChicagoPHP\MeetupApp\Rsvp;
 
-class YesResponse implements Response
+class Yes implements Response
 {
 }
