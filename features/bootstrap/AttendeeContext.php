@@ -82,8 +82,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeAMessageThatIHaveSuccessfulyCheckedIn()
     {
-        $checkIn = $this->checkInList->findFor($this->member);
-        expect($checkIn->getStatus())->toBeAnInstanceOf(CheckedIn::class);
+        return; //no-op in this context
     }
 
     /**
@@ -91,6 +90,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeMyselfAsCheckedInForThisEvent()
     {
-        throw new PendingException();
+        $checkIn = $this->checkInList->findFor($this->member);
+        expect($checkIn->getStatus())->toBeAnInstanceOf(CheckedIn::class);
     }
 }
