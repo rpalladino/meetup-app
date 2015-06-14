@@ -5,6 +5,7 @@ namespace ChicagoPHP\MeetupApp\CheckIn;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use SplObjectStorage;
 use ChicagoPHP\MeetupApp\Event\Event;
 use ChicagoPHP\MeetupApp\Member\Member;
 
@@ -15,16 +16,18 @@ class CheckInList implements IteratorAggregate, Countable
     public static function forEvent(Event $event)
     {
         $checkInList = new CheckInList();
-        $checkInList->checkIns = array_map(function ($rsvp) {
-            return CheckIn::fromRSVP($rsvp);
-        }, $event->getRSVPs());
+        $checkInList->checkIns = new SplObjectStorage();
+        
+        foreach ($event->getRSVPs() as $rsvp) {
+            $checkInList->checkIns->attach(CheckIn::fromRSVP($rsvp));
+        }
 
         return $checkInList;
     }
 
     public function getIterator()
     {
-        return new ArrayIterator($this->checkIns);
+        return $this->checkIns;
     }
 
     public function count()
@@ -34,6 +37,18 @@ class CheckInList implements IteratorAggregate, Countable
 
     public function checkIn(Member $member)
     {
-        // TODO: write logic here
+        $checkIn = $this->findFor($member);
+
+        $this->checkIns->detach($checkIn);
+        $this->checkIns->attach($checkIn->withStatus(new CheckedIn()));
+    }
+
+    public function findFor(Member $member)
+    {
+        foreach ($this->checkIns as $checkIn) {
+            if ($checkIn->getMember() == $member) {
+                return $checkIn;
+            }
+        }
     }
 }

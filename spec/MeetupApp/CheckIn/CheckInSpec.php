@@ -2,6 +2,10 @@
 
 namespace spec\ChicagoPHP\MeetupApp\CheckIn;
 
+use ChicagoPHP\MeetupApp\CheckIn\CheckIn;
+use ChicagoPHP\MeetupApp\CheckIn\CheckedIn;
+use ChicagoPHP\MeetupApp\CheckIn\NotCheckedIn;
+use ChicagoPHP\MeetupApp\CheckIn\Status;
 use ChicagoPHP\MeetupApp\Member\Member;
 use ChicagoPHP\MeetupApp\Rsvp\Rsvp;
 use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
@@ -18,11 +22,23 @@ class CheckInSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('ChicagoPHP\MeetupApp\CheckIn\CheckIn');
+        $this->shouldHaveType(CheckIn::class);
     }
 
     function it_can_retrieve_the_member()
     {
         $this->getMember()->shouldHaveType(Member::class);
+    }
+
+    function it_has_status_of_not_checked_in_by_default()
+    {
+        $this->getStatus()->shouldHaveType(NotCheckedIn::class);
+    }
+
+    function it_modifies_status_immutably(Status $status)
+    {
+        $modified = $this->withStatus($status);
+        $modified->shouldHaveType(CheckIn::class);
+        $this->shouldNotBe($modified);
     }
 }
