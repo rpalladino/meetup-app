@@ -14,5 +14,11 @@
         "psr-4": {
             "ChicagoPHP\\": "src/"
         }
+    },
+    "scripts": {
+        "test": [
+            "phpspec run",
+            "behat --format progress"
+        ]
     }
 }
