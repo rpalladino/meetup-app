@@ -15,6 +15,11 @@ use ChicagoPHP\MeetupApp\Rsvp\YesResponse;
  */
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
+    private $member;
+    private $event;
+    private $checkInList;
+    private $selectedForCheckIn;
+
     /**
      * @Transform :response
      */
@@ -55,10 +60,10 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iSelectMyselfFromTheCheckInListForThisEvent()
     {
-        $checkInList = CheckInList::forEvent($this->event);
-        foreach ($checkInList as $checkIn) {
+        $this->checkInList = CheckInList::forEvent($this->event);
+        foreach ($this->checkInList as $checkIn) {
             if ($checkIn->getMember() == $this->member) {
-                $selectedForCheckIn = $checkIn->getMember();
+                $this->selectedForCheckIn = $checkIn->getMember();
             }
         }
     }

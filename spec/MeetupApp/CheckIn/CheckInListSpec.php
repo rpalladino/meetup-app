@@ -36,4 +36,9 @@ class CheckInListSpec extends ObjectBehavior
     {
         $this->count()->shouldBe(1);
     }
+
+    function it_can_check_in_a_member(Member $member)
+    {
+        $this->checkIn($member);
+    }
 }

@@ -6,6 +6,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use ChicagoPHP\MeetupApp\Event\Event;
+use ChicagoPHP\MeetupApp\Member\Member;
 
 class CheckInList implements IteratorAggregate, Countable
 {
@@ -29,5 +30,10 @@ class CheckInList implements IteratorAggregate, Countable
     public function count()
     {
         return count($this->checkIns);
+    }
+
+    public function checkIn(Member $member)
+    {
+        // TODO: write logic here
     }
 }
