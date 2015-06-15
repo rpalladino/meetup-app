@@ -3,21 +3,46 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Mink\Driver\BrowserKitDriver;
+use Behat\Mink\Mink;
+use Behat\Mink\Session;
+use Behat\MinkExtension\Context\RawMinkContext;
+use ChicagoPHP\MeetupApp\Framework\Silex;
+use Symfony\Component\HttpKernel\Client;
 
 /**
  * Defines application features from the specific context.
  */
-class WebAttendeeContext implements Context, SnippetAcceptingContext
+class WebAttendeeContext extends RawMinkContext implements Context, SnippetAcceptingContext
 {
+    private static $application;
+
     /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @BeforeSuite
      */
-    public function __construct()
+    public static function initializeApplication()
     {
+        self::$application = new Silex\Application();
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function initializeMink()
+    {
+        $driver = new BrowserKitDriver(new Client(self::$application));
+        $mink = new Mink(['silex' => new Session($driver)]);
+        $mink->setDefaultSessionName('silex');
+
+        $this->setMink($mink);
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function resetSessions()
+    {
+        $this->getMink()->resetSessions();
     }
 
     /**
