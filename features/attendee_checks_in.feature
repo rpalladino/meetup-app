@@ -3,6 +3,7 @@ Feature: Attendee checks in
   As a meetup attendee
   I need to be able to check in at a meetup
 
+  @critical
   Scenario: Successfully checking in at a meetup to which I RSVP'd Yes
     Given I am a meetup member named "John Smith"
     And I have RSVP'd "Yes" for the event named "Open Source Workshop"
