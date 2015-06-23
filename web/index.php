@@ -6,9 +6,10 @@ $app = new Silex\Application([
     'debug' => true,
 ]);
 
-$app->get('/', function () {
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+  'twig.path' => __DIR__.'/../resources/templates',
+));
 
-    return 'Hi!';
-});
+$app->get('/', 'App\Controllers\EventController::getEvent');
 
 $app->run();
