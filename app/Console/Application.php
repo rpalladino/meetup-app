@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Command\Fixtures;
 use Doctrine\DBAL\Migrations\Tools\Console\Command as Migrations;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
 use Pimple as Container;
@@ -25,12 +26,13 @@ class Application extends Console\Application
         ]));
 
         $this->addCommands($this->getMigrationsCommands());
+        $this->addCommands($this->getFixturesCommands());
     }
 
     /**
      * Gets the commands provided by Doctrine Migrations
-     * 
-     * @return array An array of Migrations Command instances
+     *
+     * @return array An array of Command instances
      */
     public function getMigrationsCommands()
     {
@@ -40,6 +42,18 @@ class Application extends Console\Application
             new Migrations\MigrateCommand(),
             new Migrations\StatusCommand(),
             new Migrations\VersionCommand()
+        ];
+    }
+
+    /**
+     * Gets the commands for working with data fixtures
+     *
+     * @return array An array of Command instances
+     */
+    public function getFixturesCommands()
+    {
+        return [
+            new Fixtures\LoadCommand()
         ];
     }
 }
