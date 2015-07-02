@@ -1,5 +1,9 @@
-<html>
-{% for member in members %}
-    <p>{{ member.name }}</p>
-{% endfor %}
-</html>
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <h1>{{ event.name }} <small>({{ event.id }})</small></h1>
+    {% for member in event.members %}
+        <figure><img src="{{ member.picUrl }}" alt="{{ member.name }}" /></figure>
+        <p>{{ member.name }} <small>({{ member.id }})</small></p>
+    {% endfor %}
+{% endblock %}
