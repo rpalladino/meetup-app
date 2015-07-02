@@ -13,11 +13,20 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => __DIR__.'/../resources/templates',
 ));
 
-$app[App\Contracts\Meetupable::class] = function () {
-    return new App\Services\Meetup();
-};
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
-$app->get('/', 'App\Controllers\HomeController::getHome');
-$app->get('/event/{eventId}', 'App\Controllers\EventController::getEvent');
+$app["app.home.controller"] = $app->share(function ($app) {
+    return new App\Controllers\HomeController($app['twig']);
+});
+$app["app.event.controller"] = $app->share(function ($app) {
+    return new App\Controllers\EventController($app['meetup.service'], $app['twig']);
+});
+
+$app['meetup.service'] = $app->share(function () {
+    return new App\Services\Meetup();
+});
+
+$app->get('/', 'app.home.controller:getHome');
+$app->get('/event/{eventId}', 'app.event.controller:getEvent');
 
 $app->run();
