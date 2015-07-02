@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="stylesheet" type="text/css" href="/styles/site.css" />
-        <script src="/scripts/app.js"></script>
-    </head>
-    <body>
-    <div class="container">
-        <div class="row">
-            {% for member in members %}
-                <div class="col-md-4 face">
-                    <p>{{ member.name }}</p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    </body>
-</html>
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+    <h1>{{ event.name }} <small>({{ event.id }})</small></h1>
+    {% for member in event.members %}
+        <figure><img src="{{ member.picUrl }}" alt="{{ member.name }}" /></figure>
+        <p>{{ member.name }} <small>({{ member.id }})</small></p>
+    {% endfor %}
+{% endblock %}
