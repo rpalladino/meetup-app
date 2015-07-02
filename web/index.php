@@ -19,14 +19,8 @@ $app->register(new App\Providers\MeetupServiceProvider(), [
     'meetup.api_key' => getenv('MEETUP_API_KEY')
 ]);
 
-$app["app.home.controller"] = $app->share(function ($app) {
-    return new App\Controllers\HomeController($app['twig']);
-});
-$app["app.event.controller"] = $app->share(function ($app) {
-    return new App\Controllers\EventController($app['meetup.service'], $app['twig']);
-});
-
-$app->get('/', 'app.home.controller:getHome');
-$app->get('/event/{eventId}', 'app.event.controller:getEvent');
+$controllers = new App\Providers\ControllersProvider();
+$app->register($controllers);
+$app->mount('/', $controllers);
 
 $app->run();
