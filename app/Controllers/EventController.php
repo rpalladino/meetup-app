@@ -3,18 +3,24 @@
 namespace App\Controllers;
 
 use App\Contracts\Meetupable;
-use Silex\Application as App;
-use Symfony\Component\HttpFoundation\Request;
+use Twig_Environment;
 
 class EventController
 {
-    public function getEvent(Request $request, App $app)
+    private $meetup;
+    private $twig;
+
+    public function __construct(Meetupable $meetup, Twig_Environment $twig)
     {
-        $eventId = $request->attributes->get('eventId');
+        $this->meetup = $meetup;
+        $this->twig = $twig;
+    }
 
-        $event = $app[Meetupable::class]->getEvent($eventId);
-        $event->members = $app[Meetupable::class]->getEventMembers($event->id);
+    public function getEvent($eventId)
+    {
+        $event = $this->meetup->getEvent($eventId);
+        $event->members = $this->meetup->getEventMembers($event->id);
 
-        return $app['twig']->render('event.item.twig', ['event' => $event]);
+        return $this->twig->render('event.item.twig', ['event' => $event]);
     }
 }
