@@ -12,12 +12,9 @@ class Meetup implements Meetupable
     /**
      * Create service instance
      */
-    public function __construct()
+    public function __construct(MeetupKeyAuthClient $client)
     {
-        $this->client = MeetupKeyAuthClient::factory([
-            'key' => getenv('MEETUP_API_KEY'),
-            'sign' => true
-        ]);
+        $this->client = $client;
     }
 
     /**
