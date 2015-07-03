@@ -9,6 +9,9 @@ use Silex\ServiceProviderInterface;
 
 class ControllersProvider implements ControllerProviderInterface, ServiceProviderInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function register(Application $app)
     {
         $app["app.home.controller"] = $app->share(function ($app) {
@@ -19,6 +22,9 @@ class ControllersProvider implements ControllerProviderInterface, ServiceProvide
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
@@ -32,6 +38,9 @@ class ControllersProvider implements ControllerProviderInterface, ServiceProvide
         return $controllers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function boot(Application $app)
     {
         $app->mount('/', $this);

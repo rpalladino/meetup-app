@@ -9,6 +9,9 @@ use Silex\ServiceProviderInterface;
 
 class MeetupServiceProvider implements ServiceProviderInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function register(Application $app)
     {
         $app['meetup.api_key'] = '';
@@ -23,6 +26,9 @@ class MeetupServiceProvider implements ServiceProviderInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function boot(Application $app)
     {
     }
