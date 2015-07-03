@@ -23,8 +23,11 @@ class ControllersProvider implements ControllerProviderInterface, ServiceProvide
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/', 'app.home.controller:getHome');
-        $controllers->get('/event/{eventId}', 'app.event.controller:getEvent');
+        $controllers->get('/', 'app.home.controller:getHome')
+                    ->value('template', 'home.twig');
+
+        $controllers->get('/event/{eventId}', 'app.event.controller:getEvent')
+                    ->value('template', 'event.item.twig');
 
         return $controllers;
     }
