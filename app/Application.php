@@ -11,8 +11,14 @@ use Silex\Provider\TwigServiceProvider;
 
 class Application extends \Silex\Application
 {
+    /**
+     * @var string
+     */
     private $basePath;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(array $values = array())
     {
         parent::__construct($values);
@@ -24,12 +30,20 @@ class Application extends \Silex\Application
         $this->registerViewListeners($this);
     }
 
+    /**
+     * Load config for the environment
+     */
     protected function loadConfiguration()
     {
         $dotenv = new Dotenv($this->basePath);
         $dotenv->load();
     }
 
+    /**
+     * Register service and controller providers
+     *
+     * @param  Application $app
+     */
     protected function registerProviders(Application $app)
     {
         $app->register(new TwigServiceProvider(), [
@@ -45,6 +59,11 @@ class Application extends \Silex\Application
         $app->register(new ControllersProvider());
     }
 
+    /**
+     * Register view listeners
+     *
+     * @param  Application $app
+     */
     protected function registerViewListeners(Application $app)
     {
         $app->view(new TwigRenderingListener($app['twig']));
