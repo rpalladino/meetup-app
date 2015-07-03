@@ -6,6 +6,7 @@ use App\Listeners\TwigRenderingListener;
 use App\Providers\ControllersProvider;
 use App\Providers\MeetupServiceProvider;
 use Dotenv\Dotenv;
+use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 
@@ -46,6 +47,13 @@ class Application extends \Silex\Application
      */
     protected function registerProviders(Application $app)
     {
+        $app->register(new DoctrineServiceProvider(), [
+            'db.options' => [
+                'driver'   => 'pdo_sqlite',
+                'path'     => $app->basePath.'/database/app.db',
+            ],
+        ]);
+
         $app->register(new TwigServiceProvider(), [
             'twig.path' => $app->basePath.'/resources/templates',
         ]);
