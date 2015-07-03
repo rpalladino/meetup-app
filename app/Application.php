@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Listeners\TwigRenderingListener;
+use App\Providers\ControllersProvider;
 use App\Providers\MeetupServiceProvider;
 use Dotenv\Dotenv;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -32,14 +33,16 @@ class Application extends \Silex\Application
     protected function registerProviders(Application $app)
     {
         $app->register(new TwigServiceProvider(), [
-          'twig.path' => $app->basePath.'/resources/templates',
+            'twig.path' => $app->basePath.'/resources/templates',
         ]);
-
-        $app->register(new ServiceControllerServiceProvider());
 
         $app->register(new MeetupServiceProvider(), [
             'meetup.api_key' => getenv('MEETUP_API_KEY')
         ]);
+
+        $app->register(new ServiceControllerServiceProvider());
+
+        $app->register(new ControllersProvider());
     }
 
     protected function registerViewListeners(Application $app)

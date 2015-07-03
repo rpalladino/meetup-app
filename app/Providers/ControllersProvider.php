@@ -34,5 +34,6 @@ class ControllersProvider implements ControllerProviderInterface, ServiceProvide
 
     public function boot(Application $app)
     {
+        $app->mount('/', $this);
     }
 }
