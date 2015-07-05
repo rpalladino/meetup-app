@@ -30,4 +30,9 @@ class CheckInListSpec extends ObjectBehavior
     {
         $this->members->shouldHaveCount(1);
     }
+
+    function it_has_zero_checkins_initially()
+    {
+        $this->checkIns->shouldHaveCount(0);
+    }
 }
