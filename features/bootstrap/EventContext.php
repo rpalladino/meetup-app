@@ -1,6 +1,7 @@
 <?php
 
 use App\Event;
+use App\Member;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -19,6 +20,18 @@ class EventContext implements Context, SnippetAcceptingContext
      * #var DateTime;
      */
     private $date;
+
+
+    /**
+     * @Transform :member
+     */
+    public function transformStringToMember($string)
+    {
+        $member = new Member();
+        $member->name = $string;
+
+        return $member;
+    }
 
     /**
      * @Given there is an event named :name on :date at :time
@@ -39,11 +52,13 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given the member :arg1 RSVP'd :arg2 to :arg3
+     * @Given the member :member RSVP'd :rsvp to the event
      */
-    public function theMemberRsvpDTo($arg1, $arg2, $arg3)
+    public function theMemberRsvpDTo($member, $rsvp)
     {
-        throw new PendingException();
+        if ($rsvp === "Yes") {
+            $this->event->addMember($member);
+        }
     }
 
     /**
@@ -55,9 +70,9 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then I should see the check-in list for :arg1
+     * @Then I should see the check-in list for the event
      */
-    public function iShouldSeeTheCheckInListFor($arg1)
+    public function iShouldSeeTheCheckInListForTheEvent()
     {
         throw new PendingException();
     }
