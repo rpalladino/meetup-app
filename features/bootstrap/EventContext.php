@@ -92,11 +92,11 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then the check-in list should have :arg1 check-ins
+     * @Then the check-in list should have :count check-ins
      */
-    public function theCheckInListShouldHaveCheckIns($arg1)
+    public function theCheckInListShouldHaveCheckIns($count)
     {
-        throw new PendingException();
+        expect($this->checkInList->checkIns)->toHaveCount($count);
     }
 
     /**
