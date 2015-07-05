@@ -18,4 +18,9 @@ class CheckInListSpec extends ObjectBehavior
     {
         $this->shouldHaveType('App\CheckInList');
     }
+
+    function it_allows_to_be_enabled()
+    {
+        $this->enable();
+    }
 }

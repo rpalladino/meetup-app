@@ -12,4 +12,9 @@ class CheckInList
 
         return $checkInList;
     }
+
+    public function enable()
+    {
+        // TODO: write logic here
+    }
 }
