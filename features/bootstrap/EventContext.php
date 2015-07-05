@@ -1,5 +1,6 @@
 <?php
 
+use App\CheckInList;
 use App\Event;
 use App\Member;
 use Behat\Behat\Tester\Exception\PendingException;
