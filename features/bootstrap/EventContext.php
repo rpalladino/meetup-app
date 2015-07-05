@@ -39,21 +39,21 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given there is an event named :name on :date at :time
+     * @Given there is an event named :name on :date
      */
-    public function thereIsAnEventNamedOnAt($name, $date, $time)
+    public function thereIsAnEventNamedOn($name, $date)
     {
         $this->event = new Event();
         $this->event->name = $name;
-        $this->event->date = new DateTime($date.' '.$time);
+        $this->event->date = new DateTime($date);
     }
 
     /**
-     * @Given the date is :date at :time
+     * @Given the date is :date
      */
-    public function theDateIsAt($date, $time)
+    public function theDateIsAt($date)
     {
-        $this->date = new DateTime($date.' '.$time);
+        $this->date = new DateTime($date);
     }
 
     /**
@@ -67,11 +67,12 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @When I open the check-in list for the event
+     * @When I enable the check-in list for the event
      */
-    public function iOpenTheCheckInListForTheEvent()
+    public function iEnableTheCheckInListForTheEvent()
     {
         $this->checkInList = CheckInList::forEvent($this->event);
+        $this->checkInList->enable();
     }
 
     /**
