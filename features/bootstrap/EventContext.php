@@ -39,6 +39,14 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Transform :count
+     */
+    public function transformStringToInteger($string)
+    {
+        return (int) $string;
+    }
+
+    /**
      * @Given there is an event named :name on :date
      */
     public function thereIsAnEventNamedOn($name, $date)
@@ -76,19 +84,11 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then I should see the check-in list for the event
+     * @Then the check-in list should have :count members
      */
-    public function iShouldSeeTheCheckInListForTheEvent()
+    public function theCheckInListShouldHaveMembers($count)
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then the check-in list should have :arg1 members
-     */
-    public function theCheckInListShouldHaveMembers($arg1)
-    {
-        throw new PendingException();
+        expect($this->checkInList->members)->toHaveCount($count);
     }
 
     /**
