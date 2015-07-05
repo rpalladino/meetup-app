@@ -14,11 +14,11 @@ Feature: Oragnizer enables check-ins at event
 
     Scenario: Successfully enable check-ins for event
         Given the date is "July 1" at "6:45 PM"
-        And the member "John Smith" RSVP'd "Yes" to "Help me code"
-        And the member "Alice Black" RSVP'd "Yes" to "Help me code"
-        And the member "Bob White" RSVP'd "No" to "Help me code"
+        And the member "John Smith" RSVP'd "Yes" to the event
+        And the member "Alice Black" RSVP'd "Yes" to the event
+        And the member "Bob White" RSVP'd "No" to the event
         When I open the check-in list
-        Then I should see the check-in list for "Help me code"
+        Then I should see the check-in list for the event
         And the check-in list should have 2 members
         And the check-in list should have 0 check-ins
 
