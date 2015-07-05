@@ -17,10 +17,14 @@ class EventContext implements Context, SnippetAcceptingContext
     private $event;
 
     /**
-     * #var DateTime;
+     * @var DateTime;
      */
     private $date;
 
+    /**
+     * @var CheckInList;
+     */
+    private $checkInList;
 
     /**
      * @Transform :member
@@ -62,11 +66,11 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @When I open the check-in list
+     * @When I open the check-in list for the event
      */
-    public function iOpenTheCheckInList()
+    public function iOpenTheCheckInListForTheEvent()
     {
-        throw new PendingException();
+        $this->checkInList = CheckInList::forEvent($this->event);
     }
 
     /**
