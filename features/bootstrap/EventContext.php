@@ -1,5 +1,6 @@
 <?php
 
+use App\Event;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -10,11 +11,18 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class EventContext implements Context, SnippetAcceptingContext
 {
     /**
-     * @Given there is an event named :arg1 on :arg2 at :arg3
+     * @var Event;
      */
-    public function thereIsAnEventNamedOnAt($arg1, $arg2, $arg3)
+    private $event;
+
+    /**
+     * @Given there is an event named :name on :date at :time
+     */
+    public function thereIsAnEventNamedOnAt($name, $date, $time)
     {
-        throw new PendingException();
+        $this->event = new Event();
+        $this->event->name = $name;
+        $this->event->date = new DateTime($date.' '.$time);
     }
 
     /**
