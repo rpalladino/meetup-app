@@ -19,6 +19,12 @@ class Event extends Model
     protected $name;
 
     /**
+     * Event date
+     * @var DateTime
+     */
+    protected $date;
+
+    /**
      * Event members
      *
      * @var array
