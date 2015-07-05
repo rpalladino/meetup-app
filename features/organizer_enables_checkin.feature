@@ -17,7 +17,7 @@ Feature: Oragnizer enables check-ins at event
         And the member "John Smith" RSVP'd "Yes" to the event
         And the member "Alice Black" RSVP'd "Yes" to the event
         And the member "Bob White" RSVP'd "No" to the event
-        When I open the check-in list
+        When I open the check-in list for the event
         Then I should see the check-in list for the event
         And the check-in list should have 2 members
         And the check-in list should have 0 check-ins
