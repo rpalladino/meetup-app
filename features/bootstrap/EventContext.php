@@ -16,6 +16,11 @@ class EventContext implements Context, SnippetAcceptingContext
     private $event;
 
     /**
+     * #var DateTime;
+     */
+    private $date;
+
+    /**
      * @Given there is an event named :name on :date at :time
      */
     public function thereIsAnEventNamedOnAt($name, $date, $time)
@@ -26,11 +31,11 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given the date is :arg1 at :arg2
+     * @Given the date is :date at :time
      */
-    public function theDateIsAt($arg1, $arg2)
+    public function theDateIsAt($date, $time)
     {
-        throw new PendingException();
+        $this->date = new DateTime($date.' '.$time);
     }
 
     /**
