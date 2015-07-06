@@ -207,7 +207,10 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iAmCheckedInForThisEvent()
     {
-        throw new PendingException();
+        $this->me = $this->transformStringToMember('John Smith');
+        $this->iAttendTheEventAndGoToCheckIn();
+        $this->iSelectMyselfFromTheCheckInListForThisEvent();
+        $this->iConfirmThatIWantToCheckIn();
     }
 
     /**
