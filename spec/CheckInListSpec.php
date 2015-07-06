@@ -44,4 +44,9 @@ class CheckInListSpec extends ObjectBehavior
         $date = new DateTime('June 30');
         $this->shouldThrow(CheckInsNotAllowedException::class)->duringEnable($date);
     }
+
+    function it_checks_in_a_member(Member $member)
+    {
+        $this->checkIn($member);
+    }
 }
