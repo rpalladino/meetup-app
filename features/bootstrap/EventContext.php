@@ -143,6 +143,7 @@ class EventContext implements Context, SnippetAcceptingContext
     public function iAttendTheEventAndGoToCheckIn()
     {
         $this->onDate = $this->event->date;
+        $this->iEnableTheCheckInListForTheEvent();
     }
 
     /**
@@ -150,7 +151,6 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iSelectMyselfFromTheCheckInListForThisEvent()
     {
-        $this->iEnableTheCheckInListForTheEvent();
         foreach ($this->checkInList->members as $member) {
             if ($member == $this->me) {
                 $this->selectedForCheckIn = $member;
@@ -199,6 +199,6 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iShouldNotSeeMyselfInTheCheckInList()
     {
-        throw new PendingException();
+        expect($this->checkInList->members)->toNotContain($this->me);
     }
 }
