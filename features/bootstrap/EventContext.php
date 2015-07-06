@@ -117,4 +117,68 @@ class EventContext implements Context, SnippetAcceptingContext
     {
         expect($this->checkInException)->toBeAnInstanceOf(CheckInsNotAllowedException::class);
     }
+
+    /**
+     * @Given I RSVP'd :arg1 to the event
+     */
+    public function iRsvpDToTheEvent($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given I attend the event and go to check in
+     */
+    public function iAttendTheEventAndGoToCheckIn()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When I select myself from the check-in list for this event
+     */
+    public function iSelectMyselfFromTheCheckInListForThisEvent()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When I confirm that I want to check in
+     */
+    public function iConfirmThatIWantToCheckIn()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see a message that I have successfully checked in
+     */
+    public function iShouldSeeAMessageThatIHaveSuccessfullyCheckedIn()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see myself as checked-in for this event
+     */
+    public function iShouldSeeMyselfAsCheckedInForThisEvent()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given I did not RSVP to the event
+     */
+    public function iDidNotRsvpToTheEvent()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should not see myself in the check-in list
+     */
+    public function iShouldNotSeeMyselfInTheCheckInList()
+    {
+        throw new PendingException();
+    }
 }
