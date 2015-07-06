@@ -183,7 +183,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeMyselfAsCheckedInForThisEvent()
     {
-        throw new PendingException();
+        expect($this->checkInList->checkIns)->toContain($this->me);
     }
 
     /**
