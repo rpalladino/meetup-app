@@ -15,7 +15,13 @@ Feature: Attendee checks in
         And the check-in list should have 1 check-in
         And I should see myself as checked-in for this event
 
-    Scenario: Unable to check in at event because did not RSVP
+    Scenario: Unable to check in because member did not RSVP
         Given I did not RSVP to the event
         When I attend the event and go to check in
         Then I should not see myself in the check-in list
+
+    Scenario: Unable to check in same member twice
+        Given I am checked-in for this event
+        And I attend the event and go to check in
+        When I confirm that I want to check in
+        Then I should see a message that I am already checked in
