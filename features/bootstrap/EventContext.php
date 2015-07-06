@@ -4,6 +4,7 @@ use App\CheckInList;
 use App\CheckInsNotAllowedException;
 use App\Event;
 use App\Member;
+use App\MemberIsAlreadyCheckedInException;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -95,7 +96,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iEnableTheCheckInListForTheEvent()
     {
-        $this->checkInList = CheckInList::forEvent($this->event);
+        $this->checkInList = $this->checkInList ?: CheckInList::forEvent($this->event);
 
         try {
             $this->checkInList->enable($this->onDate);
@@ -207,7 +208,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iAmCheckedInForThisEvent()
     {
-        $this->me = $this->transformStringToMember('John Smith');
+        $this->iRsvpDToTheEvent("Yes");
         $this->iAttendTheEventAndGoToCheckIn();
         $this->iSelectMyselfFromTheCheckInListForThisEvent();
         $this->iConfirmThatIWantToCheckIn();

@@ -5,6 +5,7 @@ namespace spec\App;
 use App\CheckInsNotAllowedException;
 use App\Event;
 use App\Member;
+use App\MemberIsAlreadyCheckedInException;
 use DateTime;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -49,5 +50,11 @@ class CheckInListSpec extends ObjectBehavior
     {
         $this->checkIn($member);
         $this->checkIns->shouldHaveCount(1);
+    }
+
+    function it_does_not_allow_member_to_checkin_twice(Member $member)
+    {
+        $this->checkIn($member);
+        $this->shouldThrow(MemberIsAlreadyCheckedInException::class)->duringCheckIn($member);
     }
 }

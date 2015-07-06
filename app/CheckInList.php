@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Event;
-use App\Member;
 use DateTime;
 
 class CheckInList extends Model
@@ -51,6 +49,10 @@ class CheckInList extends Model
 
     public function checkIn(Member $member)
     {
+        if (in_array($member, $this->checkIns)) {
+            throw new MemberIsAlreadyCheckedInException();
+        }
+
         $this->checkIns[] = $member;
     }
 }
