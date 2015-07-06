@@ -23,10 +23,10 @@ Feature: Oragnizer enables check-ins at event
 
     Scenario: Cannot enable check-ins before event date
         Given the date is "June 30"
-        When I enable the check-in list
-        Then I should see a message that check-ins for the event are not yet allowed
+        When I enable the check-in list for the event
+        Then I should see a message that check-ins for the event are not allowed
 
     Scenario: Cannot enable check-ins after event date
         Given the date is "July 2"
-        When I enable the check-in list
-        Then I should see a message that event are no longer allowed
+        When I enable the check-in list for the event
+        Then I should see a message that check-ins for the event are not allowed

@@ -100,18 +100,10 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then I should see a message that check-ins for :arg1 are not yet allowed
+     * @Then I should see a message that check-ins for the event are not allowed
      */
-    public function iShouldSeeAMessageThatCheckInsForAreNotYetAllowed($arg1)
+    public function iShouldSeeAMessageThatCheckInsForTheEventAreNotAllowed()
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then I should see a message that there is no upcoming event
-     */
-    public function iShouldSeeAMessageThatThereIsNoUpcomingEvent()
-    {
-        throw new PendingException();
+        expect($this->checkInException)->toBeAnInstanceOf(CheckInsNotAllowedException::class);
     }
 }
