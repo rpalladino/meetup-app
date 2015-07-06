@@ -191,7 +191,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iDidNotRsvpToTheEvent()
     {
-        throw new PendingException();
+        $this->me = $this->transformStringToMember('John Smith');
     }
 
     /**
