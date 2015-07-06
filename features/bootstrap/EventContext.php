@@ -218,6 +218,6 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeAMessageThatIAmAlreadyCheckedIn()
     {
-        throw new PendingException();
+        expect($this->checkInException)->toBeAnInstanceOf(MemberIsAlreadyCheckedInException::class);
     }
 }
