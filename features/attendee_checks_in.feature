@@ -12,6 +12,7 @@ Feature: Attendee checks in
         When I select myself from the check-in list for this event
         And I confirm that I want to check in
         Then I should see a message that I have successfully checked in
+        And the check-in list should have 1 check-in
         And I should see myself as checked-in for this event
 
     Scenario: Unable to check in at event because did not RSVP
