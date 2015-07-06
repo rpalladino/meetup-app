@@ -48,5 +48,6 @@ class CheckInListSpec extends ObjectBehavior
     function it_checks_in_a_member(Member $member)
     {
         $this->checkIn($member);
+        $this->checkIns->shouldHaveCount(1);
     }
 }

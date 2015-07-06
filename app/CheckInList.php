@@ -51,6 +51,6 @@ class CheckInList extends Model
 
     public function checkIn(Member $member)
     {
-        // TODO: write logic here
+        $this->checkIns[] = $member;
     }
 }
