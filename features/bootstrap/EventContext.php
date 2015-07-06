@@ -201,4 +201,20 @@ class EventContext implements Context, SnippetAcceptingContext
     {
         expect($this->checkInList->members)->toNotContain($this->me);
     }
+
+    /**
+     * @Given I am checked-in for this event
+     */
+    public function iAmCheckedInForThisEvent()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see a message that I am already checked in
+     */
+    public function iShouldSeeAMessageThatIAmAlreadyCheckedIn()
+    {
+        throw new PendingException();
+    }
 }
