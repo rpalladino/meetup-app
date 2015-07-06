@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Event;
+use App\Member;
 use DateTime;
 
 class CheckInList extends Model
@@ -46,5 +47,10 @@ class CheckInList extends Model
         if ($this->event->date->format('Y-m-d') != $onDate->format('Y-m-d')) {
             throw new CheckInsNotAllowedException();
         }
+    }
+
+    public function checkIn(Member $member)
+    {
+        // TODO: write logic here
     }
 }
