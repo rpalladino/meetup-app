@@ -113,7 +113,7 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then the check-in list should have :count check-ins
+     * @Then the check-in list should have :count check-in(s)
      */
     public function theCheckInListShouldHaveCheckIns($count)
     {
@@ -164,7 +164,7 @@ class EventContext implements Context, SnippetAcceptingContext
     public function iConfirmThatIWantToCheckIn()
     {
         try {
-        $this->checkInList->checkIn($this->selectedForCheckIn);
+            $this->checkInList->checkIn($this->selectedForCheckIn);
         } catch (Exception $e) {
             $this->checkInException = $e;
         }
