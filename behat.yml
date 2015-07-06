@@ -3,6 +3,6 @@ default:
     meetup_organizer:
       contexts: [ EventContext ]
       filters: { role: meetup organizer }
-    meetup_atendee:
+    meetup_attendee:
       contexts: [ EventContext ]
       filters: { role: meetup attendee }
