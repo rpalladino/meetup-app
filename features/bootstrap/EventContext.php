@@ -34,6 +34,16 @@ class EventContext implements Context, SnippetAcceptingContext
     private $checkInException;
 
     /**
+     * @var Member
+     */
+    private $me;
+
+    /**
+     * @var Member
+     */
+    private $selectedForCheckIn;
+
+    /**
      * @Transform :member
      */
     public function transformStringToMember($string)
@@ -123,8 +133,8 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iRsvpDToTheEvent($rsvp)
     {
-        $me = $this->transformStringToMember('John Smith');
-        $this->theMemberRsvpDToTheEvent($me, $rsvp);
+        $this->me = $this->transformStringToMember('John Smith');
+        $this->theMemberRsvpDToTheEvent($this->me, $rsvp);
     }
 
     /**
@@ -140,7 +150,12 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iSelectMyselfFromTheCheckInListForThisEvent()
     {
-        throw new PendingException();
+        $this->iEnableTheCheckInListForTheEvent();
+        foreach ($this->checkInList->members as $member) {
+            if ($member == $this->me) {
+                $this->selectedForCheckIn = $member;
+            }
+        }
     }
 
     /**
