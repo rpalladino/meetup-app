@@ -1,6 +1,7 @@
 <?php
 
 use App\CheckInList;
+use App\CheckInsNotAllowedException;
 use App\Event;
 use App\Member;
 use Behat\Behat\Tester\Exception\PendingException;
@@ -20,12 +21,17 @@ class EventContext implements Context, SnippetAcceptingContext
     /**
      * @var DateTime;
      */
-    private $date;
+    private $onDate;
 
     /**
      * @var CheckInList;
      */
     private $checkInList;
+
+    /**
+     * @var Exception
+     */
+    private $checkInException;
 
     /**
      * @Transform :member
@@ -59,15 +65,15 @@ class EventContext implements Context, SnippetAcceptingContext
     /**
      * @Given the date is :date
      */
-    public function theDateIsAt($date)
+    public function theDateIs($date)
     {
-        $this->date = new DateTime($date);
+        $this->onDate = new DateTime($date);
     }
 
     /**
      * @Given the member :member RSVP'd :rsvp to the event
      */
-    public function theMemberRsvpDTo($member, $rsvp)
+    public function theMemberRsvpDToTheEvent($member, $rsvp)
     {
         if ($rsvp === "Yes") {
             $this->event->addMember($member);
@@ -80,7 +86,12 @@ class EventContext implements Context, SnippetAcceptingContext
     public function iEnableTheCheckInListForTheEvent()
     {
         $this->checkInList = CheckInList::forEvent($this->event);
-        $this->checkInList->enable();
+
+        try {
+            $this->checkInList->enable($this->onDate);
+        } catch (Exception $e) {
+            $this->checkInException = $e;
+        }
     }
 
     /**
