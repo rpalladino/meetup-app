@@ -119,11 +119,12 @@ class EventContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given I RSVP'd :arg1 to the event
+     * @Given I RSVP'd :rsvp to the event
      */
-    public function iRsvpDToTheEvent($arg1)
+    public function iRsvpDToTheEvent($rsvp)
     {
-        throw new PendingException();
+        $me = $this->transformStringToMember('John Smith');
+        $this->theMemberRsvpDToTheEvent($me, $rsvp);
     }
 
     /**
