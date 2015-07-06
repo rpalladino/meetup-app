@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Event;
+use DateTime;
 
 class CheckInList extends Model
 {
@@ -16,6 +17,11 @@ class CheckInList extends Model
      */
     protected $members;
 
+    /**
+     * @var Event
+     */
+    protected $event;
+
     public function __construct()
     {
         $this->checkIns = [];
@@ -25,13 +31,20 @@ class CheckInList extends Model
     public static function forEvent(Event $event)
     {
         $checkInList = new self();
+        $checkInList->event = $event;
         $checkInList->members = $event->members;
 
         return $checkInList;
     }
 
-    public function enable()
+    public function enable(DateTime $onDate = null)
     {
-        // TODO: write logic here
+        if (! isset($onDate)) {
+            $onDate = new DateTime();
+        }
+
+        if ($this->event->date->format('Y-m-d') != $onDate->format('Y-m-d')) {
+            throw new CheckInsNotAllowedException();
+        }
     }
 }
