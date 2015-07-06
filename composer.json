@@ -16,5 +16,11 @@
     "psr-4" : {
       "App\\": "app/"
     }
+  },
+  "scripts": {
+    "test": [
+      "phpspec run --format=progress",
+      "behat --format=progress"
+    ]
   }
 }
