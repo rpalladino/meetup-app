@@ -163,7 +163,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iConfirmThatIWantToCheckIn()
     {
-        throw new PendingException();
+        $this->checkInList->checkIn($this->selectedForCheckIn);
     }
 
     /**
