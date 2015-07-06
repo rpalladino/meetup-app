@@ -163,7 +163,11 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iConfirmThatIWantToCheckIn()
     {
+        try {
         $this->checkInList->checkIn($this->selectedForCheckIn);
+        } catch (Exception $e) {
+            $this->checkInException = $e;
+        }
     }
 
     /**
@@ -171,7 +175,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iShouldSeeAMessageThatIHaveSuccessfullyCheckedIn()
     {
-        throw new PendingException();
+        expect($this->checkInException)->shouldBe(null);
     }
 
     /**
