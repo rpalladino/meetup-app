@@ -132,7 +132,7 @@ class EventContext implements Context, SnippetAcceptingContext
      */
     public function iAttendTheEventAndGoToCheckIn()
     {
-        throw new PendingException();
+        $this->onDate = $this->event->date;
     }
 
     /**
