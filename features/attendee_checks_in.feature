@@ -6,6 +6,7 @@ Feature: Attendee checks in
     Background:
         Given there is an event named "Help me code" on "July 1"
 
+    @critical
     Scenario: Successfully check in at an event
         Given I RSVP'd "Yes" to the event
         And I attend the event and go to check in

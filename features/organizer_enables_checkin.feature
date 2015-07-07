@@ -12,6 +12,7 @@ Feature: Oragnizer enables check-ins at event
     Background:
         Given there is an event named "Help me code" on "July 1"
 
+    @critical
     Scenario: Successfully enable check-ins for event
         Given the date is "July 1"
         And the member "John Smith" RSVP'd "Yes" to the event
