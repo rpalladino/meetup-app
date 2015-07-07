@@ -1,8 +1,8 @@
 default:
   suites:
     meetup_organizer:
-      contexts: [ EventContext ]
+      contexts: [ EventOrganizerContext ]
       filters: { role: meetup organizer }
     meetup_attendee:
-      contexts: [ EventContext ]
+      contexts: [ EventAttendeeContext ]
       filters: { role: meetup attendee }
