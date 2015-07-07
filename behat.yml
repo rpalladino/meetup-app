@@ -6,3 +6,9 @@ default:
     meetup_attendee:
       contexts: [ EventAttendeeContext ]
       filters: { role: meetup attendee }
+    web_meetup_organizer:
+      contexts: [ WebEventOrganizerContext ]
+      filters: { role: meetup organizer, tags: critical }
+    web_meetup_attendee:
+      contexts: [ WebEventAttendeeContext ]
+      filters: { role: meetup attendee, tags: critical }
