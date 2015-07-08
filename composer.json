@@ -7,10 +7,12 @@
     "twig/twig": "^1.18"
   },
   "require-dev": {
-      "behat/behat": "^3.0",
-      "phpspec/phpspec": "^2.2",
-      "bossa/phpspec2-expect": "^1.0",
-      "psy/psysh": "^0.4.4"
+    "behat/behat": "^3.0",
+    "behat/mink-extension": "^2.0",
+    "behat/mink-browserkit-driver": "^1.2",
+    "phpspec/phpspec": "^2.2",
+    "bossa/phpspec2-expect": "^1.0",
+    "psy/psysh": "^0.4.4"
   },
   "autoload": {
     "psr-4" : {
