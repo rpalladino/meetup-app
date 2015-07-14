@@ -1,0 +1,5 @@
+default:
+  suites:
+    meetup_event:
+      contexts: [ MeetupEventContext ]
+      filters: { role: meetup group member }
