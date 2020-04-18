@@ -1,5 +1,9 @@
 <?php
 
+use App\Meetup\Event;
+use App\Meetup\Member;
+use App\Meetup\RSVP\RSVP;
+use App\Meetup\RSVP\Response;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -11,11 +15,32 @@ use Behat\Gherkin\Node\TableNode;
 class MeetupEventContext implements Context, SnippetAcceptingContext
 {
     /**
+     * @var Event
+     */
+    private $event;
+
+    public function transformTableToRSVPs(TableNode $table)
+    {
+        $rsvps = [];
+
+        foreach ($table->getHash() as $row) {
+            $member = Member::named($row['member_name']);
+            $response = Response::fromString($row['response']);
+            $rsvps[] = RSVP::fromMemberWithResponse($member, $response);
+        }
+
+        return $rsvps;
+    }
+
+    /**
      * @Given there is a meetup event with RSVPs:
      */
     public function thereIsAMeetupEventWithRsvps(TableNode $table)
     {
-        throw new PendingException();
+        $rsvps = $this->transformTableToRSVPs($table);
+
+        $event = new Event();
+        $this->event = $event->withRSVPs($rsvps);
     }
 
     /**
