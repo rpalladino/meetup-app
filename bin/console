@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+define('NAME', 'ChicagoPHP Meetup App Console');
+define('VERSION', '0.1.0');
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console;
+use Doctrine\DBAL\Migrations\Tools\Console as Migrations;
+use Doctrine\DBAL\Tools\Console as DBAL;
+
+$console = new Console\Application(NAME, VERSION);
+
+$helperSet = new Console\Helper\HelperSet();
+$helperSet->set(new Console\Helper\DialogHelper(), 'dialog');
+$console->setHelperSet($helperSet);
+
+$helperSet = new Console\Helper\HelperSet(array(
+            'connection' => new DBAL\Helper\ConnectionHelper($app['db']),
+            'dialog'     => new Console\Helper\DialogHelper(),
+        ));
+
+$console->addCommands([
+    new Migrations\Command\ExecuteCommand(),
+    new Migrations\Command\GenerateCommand(),
+    new Migrations\Command\LatestCommand(),
+    new Migrations\Command\MigrateCommand(),
+    new Migrations\Command\StatusCommand(),
+    new Migrations\Command\VersionCommand()
+]);
+
+$console->run();
